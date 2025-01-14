@@ -28,7 +28,14 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return response()->json(Todo::create($request->all()));
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+    
+        $todo = Todo::create(['name' => $request->name]);
+    
+        return response()->json($todo, 201);
     }
 
     /**
@@ -52,7 +59,13 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        
+        $todo->update(['name' => $request->name]);
+        
+        return response()->json($todo);
     }
 
     /**
@@ -60,6 +73,7 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        return response()->json(['message' => 'Todo deleted successfully.'], 200);
     }
 }

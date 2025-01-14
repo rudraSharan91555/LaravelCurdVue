@@ -10,16 +10,16 @@
                                 aria-label="todo" aria-describedby="todo" />
 
                             <div class="input-group-append">
-                                <button v-if="!todo_editing" type="button" class="btn btn-info text-white ml-2 mr-2"
-                                    @click="saveTodo()">Add</button>
-
-                                <button v-else type="button" class="btn btn-info text-white "
-                                    @click="saveTodo()">Update</button>
+                                <!-- Use the same method for Add and Update buttons -->
+                                <button type="button" class="btn btn-info text-white ml-2 mr-2" 
+                                        @click="saveTodo()">
+                                    {{ todo_editing ? 'Update' : 'Add' }}
+                                </button>
                             </div>
 
                         </div>
                         <button type="button" class="btn btn-sm text-danger float-right" 
-                        @click="resetTodo()">Reset</button>
+                                @click="resetTodo()">Reset</button>
                         <table class="table table-bordered mt-4">
                             <thead>
                                 <tr>
@@ -80,7 +80,7 @@ export default {
             const trimmedInput = this.todo_input.trim();
             if (trimmedInput) {
                 if (this.todo_editing) {
-
+                    // Update existing todo
                     axios
                         .put(`${this.api}/${this.todo_editing.id}`, { name: trimmedInput })
                         .then((response) => {
@@ -93,6 +93,7 @@ export default {
                             console.error("Error saving todo:", error);
                         });
                 } else {
+                    // Add new todo
                     axios
                         .post(this.api, { name: trimmedInput })
                         .then((response) => {

@@ -1,15 +1,26 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import * as Vue from 'vue' // in Vue 3
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import { createRouter, createWebHistory } from 'vue-router';
+import App from './layouts/App.vue';
+import Home from './pages/Home.vue';
 
-import Todo from './components/Todo.vue';
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home,
+  },
+];
 
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
-const app = createApp({});
-
-app.component('Todo',Todo);
-app.use(VueAxios, axios)
-
+// Create Vue app instance
+const app = createApp(App);
+app.use(VueAxios, axios);
+app.use(router);
 app.mount('#app');

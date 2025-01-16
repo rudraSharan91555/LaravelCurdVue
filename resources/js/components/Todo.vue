@@ -10,7 +10,6 @@
                                 aria-label="todo" aria-describedby="todo" />
 
                             <div class="input-group-append">
-                                <!-- Use the same method for Add and Update buttons -->
                                 <button type="button" class="btn btn-info text-white ml-2 mr-2" 
                                         @click="saveTodo()">
                                     {{ todo_editing ? 'Update' : 'Add' }}
@@ -18,8 +17,11 @@
                             </div>
 
                         </div>
-                        <button type="button" class="btn btn-sm text-danger float-right" 
-                                @click="resetTodo()">Reset</button>
+                        
+                           <button type="button" class="btn btn-sm text-danger float-end" 
+                                @click="resetTodo()">Reset</button> 
+                        
+                        
                         <table class="table table-bordered mt-4">
                             <thead>
                                 <tr>
@@ -32,7 +34,7 @@
                                 <tr v-for="(todo, index) in todos" :key="todo.id">
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ todo.name }}</td>
-                                    <td>
+                                    <td class="d-flex gap-3">
                                         <button type="button" class="btn btn-sm btn-danger"
                                             @click="deleteTodo(todo.id)">Delete</button>
 

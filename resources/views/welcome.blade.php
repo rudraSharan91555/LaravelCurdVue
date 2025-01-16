@@ -21,8 +21,8 @@
 
 <body class="antialiased">
     <div id="app">
-        {{-- <example-component /> --}}
-        <Todo/>
+        <App/>
+        {{-- <Todo/> --}}
     </div>
 
 
